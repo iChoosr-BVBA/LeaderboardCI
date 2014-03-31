@@ -17,6 +17,9 @@ io.configure(function(){
   io.set("polling duration", 10);
 });
 
+app.get('/', function(req,res){
+  res.render('index');
+});
 
 
 app.post('/', function(req,res){
