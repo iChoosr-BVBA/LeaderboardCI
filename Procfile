@@ -1,2 +1,2 @@
-web: node --debug server.js
-web: node-inspector
+web: node --debug server.js -p 80
+web: node-inspector -p 8080
