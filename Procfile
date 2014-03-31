@@ -1,1 +1,1 @@
-web: node RemoteDebug.js server.js
+web: node --debug server.js
