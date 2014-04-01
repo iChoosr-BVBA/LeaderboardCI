@@ -341,12 +341,20 @@ th, td {
     height: 15%;
     background-color: black;
     color: white;
+    font-size:250%;
 }
 .gravatar {
     height: 60%;
+    
+}
+.gravatar img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
 }
 .points {
     height: 15%;
     text-align: center;
     font-weight: bold;
+    font-size:200%;
 }
