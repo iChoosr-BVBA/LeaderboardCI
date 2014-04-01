@@ -4,7 +4,7 @@ var http = require('http');
 var server = http.createServer(app)
 var io = require('socket.io').listen(server);
 var points = require('./GetBuilds');
-
+var profiles = [];
 app.configure(function(){
   app.use("/css", express.static(__dirname + '/css'));
   app.use("/js", express.static(__dirname + '/js'));
@@ -26,9 +26,10 @@ app.get('/', function(req,res){
 
 app.post('/', function(req,res){
   //POST data to any listeners
-  console.log((req['body']['build']['buildId']));
+  console.log(req['body']['build']['buildId']);
     try {
         points(req['body']['build']['buildId'], function(err, profile) {
+            profiles = profile;
             io.sockets.in('callbackroom').emit('message', profile);
             console.log(profile);
         });
@@ -48,4 +49,8 @@ server.listen(port, function(){
 //Socket events
 io.on('connection', function(socket){
   socket.join('callbackroom');
+    if (profiles != []) {
+        io.sockets.in('callbackroom').emit('message', profiles);
+    }
+
 });
