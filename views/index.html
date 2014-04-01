@@ -10,13 +10,13 @@
     $(function(){
     $(".gridster ul").gridster({
     widget_margins: [10, 10],
-    widget_base_dimensions: [140, 140]
+    widget_base_dimensions: [140, 93]
     });
     });
 	$(function(){
 	var gridster = $(".gridster ul").gridster().data('gridster');
     gridster.disable();
-	gridster.add_widget('<li class="new"><table><tr><th scope="col" class="name">Bob</th></tr><tr><td class="gravatar"><img src="http://www.gravatar.com/avatar/2ef4fa6260d1ff9d4c143a7bc89b6992?s=200"></img></td></tr><tr><td class="points">12</td></tr</table></li>', 2, 2,1,1);});
+	gridster.add_widget('<li class="new"><table><tr><th scope="col" class="name">Bob</th><td class="gravatar"><img src="http://www.gravatar.com/avatar/2ef4fa6260d1ff9d4c143a7bc89b6992?s=200"></img></td><td class="points">12</td></tr</table></li>', 2, 2,1,1);});
     //var socket = io.connect()
 //    socket.on('message', function(msg){
 //    var gridster = $(".gridster ul").gridster().data('gridster');

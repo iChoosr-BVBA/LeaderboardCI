@@ -10,7 +10,7 @@ head
       $(function(){
       $(".gridster ul").gridster({
       widget_margins: [10, 10],
-      widget_base_dimensions: [140, 140]
+      widget_base_dimensions: [140, 93]
       });
       });
       var socket = io.connect()
@@ -20,7 +20,7 @@ head
       gridster.remove_all_widgets();
       for(i=0;i<Object.keys(msg).length;++i)
       {
-        gridster.add_widget('<li class="new"><table><tr><th scope="col" class="name">'+msg[i]['name']+'</th></tr><tr><td class="gravatar"><img src='+msg[i]['gravUrl']+'></img></td></tr><tr><td class="points">'+msg[i]['points']+'</td></tr</table></li>', 2, 2,1,1);
+        gridster.add_widget('<li class="new"><table><tr><th scope="col" class="name">'+msg[i]['name']+'</th><td class="gravatar"><img src='+msg[i]['gravUrl']+'></img></td><td class="points">'+msg[i]['points']+'</td></tr</table></li>', 2, 2,1,1);
       }
       })
     style.
