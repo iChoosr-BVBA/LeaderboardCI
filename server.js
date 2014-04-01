@@ -6,8 +6,11 @@ var io = require('socket.io').listen(server);
 var points = require('./GetBuilds');
 
 app.configure(function(){
+  app.use("/css", express.static(__dirname + '/css'));
+  app.use("/js", express.static(__dirname + '/js'));
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
+
   app.use(express.logger());
   app.use(express.bodyParser());
 });
@@ -21,12 +24,14 @@ app.get('/', function(req,res){
   res.render('index');
 });
 
-
 app.post('/', function(req,res){
   //POST data to any listeners
   console.log((req['body']['build']['buildId']));
     try {
-        points(req['body']['build']['buildId']);
+        points(req['body']['build']['buildId'], function(err, profile) {
+            io.sockets.in('callbackroom').emit('message', profile);
+            console.log(profile);
+        });
     } catch (e) {
         console.log(e);
     } 

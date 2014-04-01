@@ -5,6 +5,7 @@ function Person(Name) {
     this.lastdate = [];
     this.build = [];
     this.builDateArr = [];
+    this.gravUrl = "";
 }
     // class methods
 Person.prototype = {

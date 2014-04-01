@@ -7,7 +7,7 @@ function getData(path, callback) {
     var req = http.request({
         host: host, // here only the domain name
         auth: auth,
-        port: 8080,//8111,
+        port: 8111,//8111,
         path: path, // the rest of the url with parameters if needed
         method: 'GET', // do GET
         headers: {

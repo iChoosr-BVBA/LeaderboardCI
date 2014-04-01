@@ -7,7 +7,8 @@
     "socket.io": "~0.9",
     "jade": "0.31.x",
     "async": "~0.6.1",
-    "node-inspector": "~0.7.2"
+    "node-inspector": "~0.7.2",
+    "gravatar": "~1.0.6"
   },
   "engines": {
     "node": "0.10.x",

@@ -1,13 +1,32 @@
 !!! 5
 html
-  head
-    script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js")
-    script(src="/socket.io/socket.io.js")
-    script
+head
+    script(src='/socket.io/socket.io.js')
+    link(rel='stylesheet', type='text/css', href='/js/jquery.gridster.min.css')
+    link(rel='stylesheet', type='text/css', href='/css/style.css')
+    script(type='text/javascript', src='/js/jquery-2.1.0.min.js')
+    script(type='text/javascript', src='/js/jquery.gridster.min.js')
+    script.
+      $(function(){
+      $(".gridster ul").gridster({
+      widget_margins: [10, 10],
+      widget_base_dimensions: [140, 140]
+      });
+      });
       var socket = io.connect()
       socket.on('message', function(msg){
-        $("#messages").append("<li>"+msg+"</li>");
+      var gridster = $(".gridster ul").gridster().data('gridster');
+      gridster.disable();
+      gridster.remove_all_widgets();
+      for(i=0;i<Object.keys(msg).length;++i)
+      {
+        gridster.add_widget('<li class="new"><table><tr><th scope="col" class="name">'+msg[i]['name']+'</th></tr><tr><td class="gravatar"><img src='+msg[i]['gravUrl']+'></img></td></tr><tr><td class="points">'+msg[i]['points']+'</td></tr</table></li>', 2, 2,1,1);
+      }
       })
-  body
-    h1 Callback Testing
+    style.
+      
+  body(style='background-color: #999;')
+    h1(align='center') Leaderboard
+    .gridster
+      ul
     ul#messages
