@@ -5,11 +5,12 @@ var GetData = require('./Request');
 var buildStatus = require('./Builds');
 var file = require('./FileIO');
 var userInfo = require('./getUsers');
+var _ = require('lodash');
 var builds = "";
 var buildID = "";
 var buildstatus = [];
 var change = [];
-var usersarray = [];
+var usersarray = {};
 var fileio = new file();
 function getPoints(buildId, Person) {
     async.series([
@@ -42,37 +43,62 @@ function getPoints(buildId, Person) {
     ],
 // optional callback
         function (err, results) {
-            var tempfile= JSON.parse(fileio.readFile("temp/score.txt"));
-            for (var i = 0; i < tempfile.length; i++) {
-                usersarray[i]=new person(tempfile[i]['name']);
-                usersarray[i].lastdate = tempfile[i]['lastdate'];
-                usersarray[i].build = tempfile[i]['build'];
-                usersarray[i].gravUrl = tempfile[i]['gravUrl'];
-                usersarray[i].points = tempfile[i]['points'];
+            try {
+                var tempfile = JSON.parse(fileio.readFile("temp/score.txt"));
+                for (var user in tempfile) {
+                    usersarray[user] = new person(tempfile[user]['name']);
+                    usersarray[user].lastdate = tempfile[user]['lastdate'];
+                    usersarray[user].build = tempfile[user]['build'];
+                    usersarray[user].gravUrl = tempfile[user]['gravUrl'];
+                    if (tempfile[user]['points'] > 0) {
+                        usersarray[user].addPoints(tempfile[user]['points']);
+                    }
+                        
+                    else {
+                        usersarray[user].substractPoints(tempfile[user]['points']);
+                    }
+                        
+                }
+            } catch (e) {
+                console.log(e);
             }
             buildstatus[0] = new buildStatus(results[0]['buildType']['name'], results[0]['status'], results[0]['buildType']['id'], results[0]['startDate'], results[0]['finishDate']);
+            var uniqpersons = _.uniq(results[2]);
 
-            for (var k = 0; k < buildstatus.length; k++) {
-                if (!usersarray[k] && results[2] != null) {
-                    //usersarray[k] = new person(results[2][0]);
-                    usersarray.push(new person(results[2][0]));
-                }
-                if (results[0] != null && buildstatus[0]['id'] != 'bt15') {
-                    if (buildstatus[k]['status'] == "SUCCESS") {
-                        usersarray[k].addPoints(2);
-                        usersarray[k].lastdate.push(buildstatus[k]['finishdate']);
-                        usersarray[k].build.push(buildstatus[k]['id']);
-                    } else if (buildstatus[k]['status'] == "FAILURE" && results[4][k] != null) {
-                        usersarray[k].substractPoints(4);
-                        usersarray[k].lastdate.push(buildstatus[k]['finishdate']);
-                        usersarray[k].build.push(buildstatus[k]['id']);
+            for (var k = 0; k < uniqpersons.length; k++) {
+                if (uniqpersons[k] != "undefined" && uniqpersons[k] != null) {
+                    if (!usersarray[uniqpersons[k]]) {
+                        usersarray[uniqpersons[k]] = new person(uniqpersons[k]);
                     }
-
                 }
 
+                if (usersarray[uniqpersons[k]]) {
+                    if (results[0] != null && buildstatus[0]['id'] != 'bt15') {
+                        if (buildstatus[0]['status'] == "SUCCESS") {
+                            usersarray[uniqpersons[k]].addPoints(2);
+                            usersarray[uniqpersons[k]].lastdate.push(buildstatus[0]['finishdate']);
+                            usersarray[uniqpersons[k]].build.push(buildstatus[0]['id']);
+                        } else if (buildstatus[0]['status'] == "FAILURE" && buildstatus[0]['id'] != 'bt15') {
+                            usersarray[uniqpersons[k]].substractPoints(4);
+                            usersarray[uniqpersons[k]].lastdate.push(buildstatus[0]['finishdate']);
+                            usersarray[uniqpersons[k]].build.push(buildstatus[0]['id']);
+                        }
+                    }
+                }
 
             }
-            userInfo(function (er2, profiles) {
+
+
+
+            /*userInfo(function (er2, profiles) {
+                /*var user = Object.keys(usersarray);
+                user.forEach(function (user) {
+                    var items = Object.keys(usersarray[user]);
+                    items.forEach(function (item) {
+                        var value = usersarray[user][item];
+                        console.log(user + ': ' + item + ' = ' + value);
+                    });
+                });#1#
                 for (var user = 0; user < usersarray.length; user++) {
                     for (var i = 0; i < profiles.length; i++) {
                         if (usersarray[user]['name'] == profiles[i]['username']) {
@@ -80,14 +106,15 @@ function getPoints(buildId, Person) {
                         }
                     }
                 }
-                fileio.writeFile("temp/score.txt", JSON.stringify(usersarray));
+                
+            });*/
+            fileio.writeFile("temp/score.txt", JSON.stringify(usersarray));
+                console.log(usersarray);
                 Person(err, usersarray);
-            });
-
 
         });
     //setTimeout(getPoints, 5 * 1000);
-}
+    }
 module.exports = getPoints;
 function getChanges(url, changes) {
     GetData(url, function (result) {

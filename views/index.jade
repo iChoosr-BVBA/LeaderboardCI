@@ -18,9 +18,9 @@ head
       var gridster = $(".gridster ul").gridster().data('gridster');
       gridster.disable();
       gridster.remove_all_widgets();
-      for(i=0;i<Object.keys(msg).length;++i)
+      for(var name in msg)
       {
-        gridster.add_widget('<li class="new"><table><tr><th scope="col" class="name">'+msg[i]['name']+'</th><td class="gravatar"><img src='+msg[i]['gravUrl']+'></img></td><td class="points">'+msg[i]['points']+'</td></tr</table></li>', 2, 2,1,1);
+        gridster.add_widget('<li class="new"><table><tr><th scope="col" class="name">'+msg[name]['name']+'</th><td class="gravatar"><img src='+msg[name]['gravUrl']+'></img></td><td class="points">'+msg[name]['points']+'</td></tr</table></li>', 2, 2,1,1);
       }
       })
     style.

@@ -1,11 +1,12 @@
 ﻿    // Constructor
-function Person(Name) {
+function Person(Name, status) {
     // always initialize all instance properties
     this.name = Name;
     this.lastdate = [];
     this.build = [];
     this.builDateArr = [];
     this.gravUrl = "";
+    this.status = status;
 }
     // class methods
 Person.prototype = {
