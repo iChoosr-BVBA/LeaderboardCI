@@ -3,11 +3,11 @@ function file() {
     
 }
 
-file.prototype.appendfile = function(path, text) {
+file.prototype.appendFile = function(path, text) {
     fs.appendFileSync(path, text );
 
 };
-file.prototype.writefile = function(path, text) {
+file.prototype.writeFile = function(path, text) {
     fs.writeFileSync(path, text );
 
 };

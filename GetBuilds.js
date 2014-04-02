@@ -80,6 +80,7 @@ function getPoints(buildId, Person) {
                     }
                 }
             }
+            fileio.writeFile("temp/score.txt",JSON.stringify(usersarray));
             Person(err, usersarray);
         });
             
