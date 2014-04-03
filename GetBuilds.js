@@ -90,27 +90,19 @@ function getPoints(buildId, Person) {
 
 
 
-            /*userInfo(function (er2, profiles) {
-                /*var user = Object.keys(usersarray);
-                user.forEach(function (user) {
-                    var items = Object.keys(usersarray[user]);
-                    items.forEach(function (item) {
-                        var value = usersarray[user][item];
-                        console.log(user + ': ' + item + ' = ' + value);
-                    });
-                });#1#
-                for (var user = 0; user < usersarray.length; user++) {
+            userInfo(function (er2, profiles) {
+                for (var user in usersarray) { 
                     for (var i = 0; i < profiles.length; i++) {
                         if (usersarray[user]['name'] == profiles[i]['username']) {
                             usersarray[user].gravUrl = profiles[i]['img'];
                         }
                     }
                 }
-                
-            });*/
-            fileio.writeFile("temp/score.txt", JSON.stringify(usersarray));
+                fileio.writeFile("temp/score.txt", JSON.stringify(usersarray));
                 console.log(usersarray);
                 Person(err, usersarray);
+            });
+            
 
         });
     //setTimeout(getPoints, 5 * 1000);
