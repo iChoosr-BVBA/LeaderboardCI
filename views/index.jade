@@ -6,6 +6,7 @@ head
     link(rel='stylesheet', type='text/css', href='/css/style.css')
     script(type='text/javascript', src='/js/jquery-2.1.0.min.js')
     script(type='text/javascript', src='/js/jquery.gridster.min.js')
+    script(type='text/javascript', src='/js/lodash.min.js')
     script.
       $(function(){
       $(".gridster ul").gridster({
@@ -18,12 +19,18 @@ head
       var gridster = $(".gridster ul").gridster().data('gridster');
       gridster.disable();
       gridster.remove_all_widgets();
-      for(var name in msg)
+      var sortJSON=function (json){
+       var arr=[],
+       obj={};
+       arr=_.map(_.sortBy(json, 'points'), _.values);
+       _.map(arr,function (el){return obj[el[0]]=el;});
+       return obj;
+      };
+      var result=sortJSON(msg);
+      for(var name in result)
       {
         gridster.add_widget('<li class="new"><table><tr><th scope="col" class="name">'+msg[name]['name']+'</th><td class="gravatar"><img src='+msg[name]['gravUrl']+'></img></td><td class="points">'+msg[name]['points']+'</td></tr</table></li>', 2, 2,1,1);
       }
-      gridData = gridster.serialize();
-      alert(gridData)
       })
     style.
       
