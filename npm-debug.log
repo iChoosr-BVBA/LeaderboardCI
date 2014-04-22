@@ -1,0 +1,70 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'fs',
+1 verbose cli   '--save' ]
+2 info using npm@1.4.3
+3 info using node@v0.10.26
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 warn package.json Callback-Testing@0.0.1 No repository field.
+6 verbose readDependencies using package.json deps
+7 verbose cache add [ 'fs', null ]
+8 verbose cache add name=undefined spec="fs" args=["fs",null]
+9 verbose parsed url { protocol: null,
+9 verbose parsed url   slashes: null,
+9 verbose parsed url   auth: null,
+9 verbose parsed url   host: null,
+9 verbose parsed url   port: null,
+9 verbose parsed url   hostname: null,
+9 verbose parsed url   hash: null,
+9 verbose parsed url   search: null,
+9 verbose parsed url   query: null,
+9 verbose parsed url   pathname: 'fs',
+9 verbose parsed url   path: 'fs',
+9 verbose parsed url   href: 'fs' }
+10 silly lockFile 3f4bb586-fs fs
+11 verbose lock fs C:\Users\senne_000\AppData\Roaming\npm-cache\3f4bb586-fs.lock
+12 silly lockFile 3f4bb586-fs fs
+13 silly lockFile 3f4bb586-fs fs
+14 verbose addNamed [ 'fs', '' ]
+15 verbose addNamed [ null, '*' ]
+16 silly lockFile a107b96b-fs fs@
+17 verbose lock fs@ C:\Users\senne_000\AppData\Roaming\npm-cache\a107b96b-fs.lock
+18 silly addNameRange { name: 'fs', range: '*', hasData: false }
+19 verbose url raw fs
+20 verbose url resolving [ 'https://registry.npmjs.org/', './fs' ]
+21 verbose url resolved https://registry.npmjs.org/fs
+22 info trying registry request attempt 1 at 10:31:24
+23 http GET https://registry.npmjs.org/fs
+24 http 404 https://registry.npmjs.org/fs
+25 silly registry.get cb [ 404,
+25 silly registry.get   { date: 'Tue, 22 Apr 2014 08:31:22 GMT',
+25 silly registry.get     server: 'CouchDB/1.6.0+build.fauxton-91-g5a2864b (Erlang OTP/R14B04)',
+25 silly registry.get     'content-type': 'application/json',
+25 silly registry.get     via: '1.1 varnish',
+25 silly registry.get     'cache-control': 'max-age=0',
+25 silly registry.get     'content-length': '52',
+25 silly registry.get     'accept-ranges': 'bytes',
+25 silly registry.get     age: '0',
+25 silly registry.get     'x-served-by': 'cache-v36-ASH, cache-lcy1123-LCY',
+25 silly registry.get     'x-cache': 'MISS, MISS',
+25 silly registry.get     'x-cache-hits': '0, 0',
+25 silly registry.get     'x-timer': 'S1398155482.126687765,VS0,VS48,VE159,VE198',
+25 silly registry.get     'keep-alive': 'timeout=10, max=50',
+25 silly registry.get     connection: 'Keep-Alive' } ]
+26 silly lockFile a107b96b-fs fs@
+27 silly lockFile a107b96b-fs fs@
+28 error 404 'fs' is not in the npm registry.
+28 error 404 You should bug the author to publish it
+28 error 404 It was specified as a dependency of 'Callback-Testing'
+28 error 404
+28 error 404 Note that you can also install from a
+28 error 404 tarball, folder, or http url, or git url.
+29 error System Windows_NT 6.2.9200
+30 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "fs" "--save"
+31 error cwd C:\Users\senne_000\Dropbox\Stage\LeaderBoard
+32 error node -v v0.10.26
+33 error npm -v 1.4.3
+34 error code E404
+35 verbose exit [ 1, true ]
