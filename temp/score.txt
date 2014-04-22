@@ -1,0 +1,66 @@
+{
+  "rakhmetovruslan": {
+    "name": "rakhmetovruslan",
+    "lastdate": [
+      "20140422T111730+0200",
+      "20140422T112122+0200",
+      "20140422T112810+0200"
+    ],
+    "build": [
+      "bt2",
+      "bt3",
+      "bt4"
+    ],
+    "builDateArr": [],
+    "gravUrl": "",
+    "points": 6
+  },
+  "cybercaveman": {
+    "name": "cybercaveman",
+    "lastdate": [
+      "20140422T112359+0200",
+      "20140422T112810+0200",
+      "20140422T113645+0200",
+      "20140422T114046+0200"
+    ],
+    "build": [
+      "bt2",
+      "bt4",
+      "bt2",
+      "bt3"
+    ],
+    "builDateArr": [],
+    "gravUrl": "",
+    "points": 10
+  },
+  "wouter": {
+    "name": "wouter",
+    "lastdate": [
+      "20140422T112359+0200",
+      "20140422T112810+0200",
+      "20140422T113645+0200",
+      "20140422T114046+0200"
+    ],
+    "build": [
+      "bt2",
+      "bt4",
+      "bt2",
+      "bt3"
+    ],
+    "builDateArr": [],
+    "gravUrl": "http://www.gravatar.com/avatar/8454be88201931f7cb2c667ec1a70c7f?s=200",
+    "points": 10
+  },
+  "ruslan": {
+    "name": "ruslan",
+    "lastdate": [
+      "20140422T114046+0200"
+    ],
+    "build": [
+      "bt3"
+    ],
+    "builDateArr": [],
+    "gravUrl": "http://www.gravatar.com/avatar/913e65d24147aeb89bcf8948b88877e9?s=200",
+    "points": 2
+  }
+}
