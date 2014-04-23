@@ -81,10 +81,12 @@ function getPoints(buildId, Person) {
                             usersarray[userName].addPoints(2);
                             usersarray[userName].lastdate.push(buildstatus[0]['finishdate']);
                             usersarray[userName].build.push(buildstatus[0]['id']);
+                            usersarray[userName].status= "Success";
                         } else if (buildstatus[0]['status'] == "FAILURE" && buildstatus[0]['id'] != 'bt15') {
                             usersarray[userName].substractPoints(4);
                             usersarray[userName].lastdate.push(buildstatus[0]['finishdate']);
                             usersarray[userName].build.push(buildstatus[0]['id']);
+                            usersarray[userName].status= "Failed";
                         }
                     }
                 }

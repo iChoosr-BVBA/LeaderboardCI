@@ -11,7 +11,7 @@ head
       $(function(){
       $(".gridster ul").gridster({
       widget_margins: [10, 10],
-      widget_base_dimensions: [140, 93]
+      widget_base_dimensions: [300, 93]
       });
       });
       var socket = io.connect()
@@ -29,7 +29,7 @@ head
       var result=sortJSON(msg);
       for(var name in result)
       {
-        gridster.add_widget('<li class="new"><table><tr><th scope="col" class="gravatar"><img src='+msg[name]['gravUrl']+'></img></th><td><table><tr><td class="name">'+msg[name]['name']+'</td></tr><tr ><td class="points">'+msg[name]['points']+'</td></tr></table></td></tr></table></li>', 2, 2,1,1);
+        gridster.add_widget('<li class="new"><div class="playerlist"><div class="player"><div class="box"><div class="headshot"><img src='+msg[name]['gravUrl']+' border="0" style="border: 1px solid black;"></div><div class="details wide"><div class="name">'+msg[name]['name']+'</div></div></div><div class="box"><div class="points">'+msg[name]['points']+'</div></div></div></div></li>', 2, 1,1,1);
       }
       })
     style.
