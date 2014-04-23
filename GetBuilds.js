@@ -68,8 +68,9 @@ function getPoints(buildId, Person) {
 
             for (var k = 0; k < uniqpersons.length; k++) {
                 if (uniqpersons[k] != "undefined" && uniqpersons[k] != null) {
+                    var userName = checkdouble(uniqpersons[k]);
                     if (!usersarray[uniqpersons[k]]) {
-                        var userName = checkdouble(uniqpersons[k]);
+                        
                         usersarray[userName] = new person(userName);
                     }
                 }
@@ -123,7 +124,14 @@ function getChanges(url, changes) {
 function getName(url, names) {
     if (url != null) {
         GetData(url, function (result) {
-            names(null, result['username']);
+            if(result.files.file.length!=0)
+            {
+                names(null, result['username']);
+            }
+            else
+                {
+                    names(null, null);
+                    }
         });
     } else {
         names(null, null);
@@ -134,7 +142,5 @@ function getBuilds(url, buildinfo) {
         buildinfo(null, result);
     });
 }
-function compare() {
 
-}
 
