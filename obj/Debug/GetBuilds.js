@@ -51,6 +51,8 @@ function getPoints(buildId, Person) {
                     usersarray[user].lastdate = tempfile[user]['lastdate'];
                     usersarray[user].build = tempfile[user]['build'];
                     usersarray[user].gravUrl = tempfile[user]['gravUrl'];
+                    usersarray[user].status = tempfile[user]['status'];
+                    usersarray[user].streak = tempfile[user]['streak'];
                     if (tempfile[user]['points'] > 0) {
                         usersarray[user].addPoints(tempfile[user]['points']);
                     }
@@ -81,12 +83,25 @@ function getPoints(buildId, Person) {
                             usersarray[userName].addPoints(2);
                             usersarray[userName].lastdate.push(buildstatus[0]['finishdate']);
                             usersarray[userName].build.push(buildstatus[0]['id']);
-                            usersarray[userName].status== "Success";
+                            if(usersarray[userName].status && usersarray[userName].status == "Success")
+                                {
+                                    if(usersarray[userName].streak<5)
+                                        {
+                                            usersarray[userName].streakAdd();
+                                        }
+                                    if(usersarray[userName].streak>=5)
+                                        {
+                                            usersarray[userName].streakReset();
+                                            usersarray[userName].addPoints(4);
+                                        }
+                                }
+                            usersarray[userName].status= "Success";
                         } else if (buildstatus[0]['status'] == "FAILURE" && buildstatus[0]['id'] != 'bt15') {
                             usersarray[userName].substractPoints(4);
                             usersarray[userName].lastdate.push(buildstatus[0]['finishdate']);
                             usersarray[userName].build.push(buildstatus[0]['id']);
-                            usersarray[userName].status== "Failed";
+                            usersarray[userName].status= "Failed";
+                            usersarray[userName].streakReset();
                         }
                     }
                 }

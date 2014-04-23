@@ -7,11 +7,13 @@ function Person(Name) {
     this.builDateArr = [];
     this.gravUrl = "";
     this.status = "";
+    this.streak = 0;
 }
     // class methods
 Person.prototype = {
     points: 0,
-    build: []
+    build: [],
+    streak: 0
 };
 Person.prototype.addPoints = function (punt) {
     this.points += punt;
@@ -27,9 +29,11 @@ Person.prototype.organizeArray = function() {
     }
     this.builDateArr.push( object);
 };
-Person.prototype.showPoints = function () {
-    console.log("Person: " + this.name + " has " + this.points + " points");
-
+Person.prototype.streakAdd = function () {
+    this.streak += 1;
+};
+Person.prototype.streakReset = function () {
+    this.streak = 0;
 };
     // export the class
 module.exports = Person;

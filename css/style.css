@@ -84,3 +84,8 @@ body, #divWrap {
 	overflow: hidden;
 	background-color: #999;
 }
+.player .status {
+	font-size: 11px;
+	padding: 0;
+	clear: both;
+}
