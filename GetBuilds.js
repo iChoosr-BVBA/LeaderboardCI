@@ -53,13 +53,14 @@ function getPoints(buildId, Person) {
                     usersarray[user].gravUrl = tempfile[user]['gravUrl'];
                     usersarray[user].status = tempfile[user]['status'];
                     usersarray[user].streak = tempfile[user]['streak'];
-                    if (tempfile[user]['points'] > 0) {
+                    usersarray[user].points = tempfile[user]['points'];
+                    /*if (tempfile[user]['points'] > 0) {
                         usersarray[user].addPoints(tempfile[user]['points']);
                     }
                         
                     else {
                         usersarray[user].substractPoints(tempfile[user]['points']);
-                    }
+                    }*/
                         
                 }
             } catch (e) {
