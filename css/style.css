@@ -21,7 +21,7 @@ ul, ol {
 	box-sizing: border-box;
 }
 body {
-    background-color: #EEEEEE;
+    background-color: black;
     font-family: 'Helvetica Neue', Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     font-size: x-small;
@@ -30,7 +30,7 @@ body {
 
 
 .gridster .gs-w {
-    background: #FFF;
+    background: #000;
     -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
@@ -51,9 +51,7 @@ table {
 .gravatar {
 	border:0;
     width: 50%;
-	color:white;
-	background-color:black;
-    
+    background-color:#000;
 }
 .gravatar img{
     display: block;
@@ -69,11 +67,7 @@ table {
 	background-color:black;
 	color:white;
 }
-.rank{
-	border:10;
-	width:10%;
-	text-align:center;
-	font-size:200%;
-	color:white;
+
+li {
 	background-color:black;
 }

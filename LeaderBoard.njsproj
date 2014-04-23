@@ -31,7 +31,12 @@
     <Compile Include="Request.js" />
     <Compile Include="server.js" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="views\index.jade" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
   <ProjectExtensions>

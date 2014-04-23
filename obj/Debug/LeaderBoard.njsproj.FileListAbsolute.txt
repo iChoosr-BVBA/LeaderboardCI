@@ -2510,3 +2510,4 @@ C:\Users\senne_000\Dropbox\Stage\LeaderBoard\obj\Debug\node_modules\socket.io\no
 C:\Users\senne_000\Dropbox\Stage\LeaderBoard\obj\Debug\node_modules\socket.io\package.json
 C:\Users\senne_000\Dropbox\Stage\LeaderBoard\obj\Debug\node_modules\socket.io\Readme.md
 C:\Users\senne_000\Dropbox\Stage\LeaderBoard\obj\Debug\bin\Microsoft.NodejsTools.WebRole.dll
+C:\Users\senne_000\Dropbox\Stage\LeaderBoard\obj\Debug\views\index.jade

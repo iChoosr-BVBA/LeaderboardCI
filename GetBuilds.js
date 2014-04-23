@@ -126,7 +126,7 @@ function getName(url, names) {
         GetData(url, function (result) {
             if(result.files.file.length!=0)
             {
-                names(null, result['username']);
+                names(null, result['user']['username']);
             }
             else
                 {

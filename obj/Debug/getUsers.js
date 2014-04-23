@@ -49,7 +49,7 @@ function getEmail(url, mail) {
     }
 }
 function getGravatar(mail, gravartarUrl) {
-    if (mail != null) {
+    if (mail != null || mail!="") {
         var gravUrl =gravatar.url(mail, {s: '200'});
         gravartarUrl(null, gravUrl);
 
