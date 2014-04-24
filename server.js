@@ -67,7 +67,7 @@ io.on( 'connection', function ( socket ) {
     try {
         redis.get( "obj", function ( er, data ) {
                     score = JSON.parse( data );
-                    if ( score.length ) {
+                    if ( score ) {
                         io.sockets.in( 'callbackroom' ).emit( 'message', score );
                     }
                 });
