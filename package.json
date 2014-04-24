@@ -9,7 +9,9 @@
     "async": "~0.6.1",
     "node-inspector": "~0.7.2",
     "gravatar": "~1.0.6",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "redis": "^0.10.1",
+    "redis-url": "^0.2.0"
   },
   "engines": {
     "node": "0.10.x",

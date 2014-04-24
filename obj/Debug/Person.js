@@ -8,6 +8,7 @@ function Person(Name) {
     this.gravUrl = "";
     this.status = "";
     this.streak = 0;
+    this.points = 0;
 }
     // class methods
 Person.prototype = {
