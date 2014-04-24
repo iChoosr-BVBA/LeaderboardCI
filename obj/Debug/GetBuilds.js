@@ -8,6 +8,7 @@ var userInfo = require( './getUsers' );
 var _ = require( 'lodash' );
 var checkdouble = require( './checkUsername' );
 var redis = require( 'redis-url' ).connect( process.env.REDISTOGO_URL );
+var excludedBuilds = require('config').ExcludeBuilds;
 var builds = "";
 var buildID = "";
 var buildstatus = [];
@@ -73,7 +74,7 @@ function getPoints( buildId, Person ) {
                         }
 
                         if ( usersarray[userName] ) {
-                            if ( results[0] != null && buildstatus[0]['id'] != 'bt15' ) {
+                            if ( results[0] != null && !_.contains(excludedBuilds, buildstatus[0]['id'])/*buildstatus[0]['id'] != 'bt15' && buildstatus[0]['id'] != 'bt3'*/ ) {
                                 if ( buildstatus[0]['status'] == "SUCCESS" ) {
                                     usersarray[userName].addPoints( 2 );
                                     usersarray[userName].lastdate.push( buildstatus[0]['finishdate'] );
@@ -88,7 +89,7 @@ function getPoints( buildId, Person ) {
                                         }
                                     }
                                     usersarray[userName].status = "Success";
-                                } else if ( buildstatus[0]['status'] == "FAILURE" && buildstatus[0]['id'] != 'bt15' ) {
+                                } else if ( buildstatus[0]['status'] == "FAILURE" && !_.contains(excludedBuilds, buildstatus[0]['id'])) {
                                     usersarray[userName].substractPoints( 4 );
                                     usersarray[userName].lastdate.push( buildstatus[0]['finishdate'] );
                                     usersarray[userName].build.push( buildstatus[0]['id'] );

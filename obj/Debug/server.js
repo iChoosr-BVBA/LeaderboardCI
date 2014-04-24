@@ -32,7 +32,7 @@ app.post( '/', function ( req, res ) {
     //POST data to any listeners
     console.log( req['body']['build']['buildId'] );
     try {
-        points( /*req['body']['build']['buildId']*/"19346", function ( err, profile ) {
+        points( /*req['body']['build']['buildId']*/"19374", function ( err, profile ) {
             profiles = profile;
             try {
                 redis.get( "obj", function ( er, data ) {
@@ -67,7 +67,7 @@ io.on( 'connection', function ( socket ) {
     try {
         redis.get( "obj", function ( er, data ) {
                     score = JSON.parse( data );
-                    if ( score.length != 0 ) {
+                    if ( score ) {
                         io.sockets.in( 'callbackroom' ).emit( 'message', score );
                     }
                 });

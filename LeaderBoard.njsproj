@@ -23,7 +23,6 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Compile Include="Builds.js" />
-    <Compile Include="CheckLastDate.js" />
     <Compile Include="checkUsername.js" />
     <Compile Include="GetBuilds.js" />
     <Compile Include="getUsers.js" />
