@@ -1,19 +1,22 @@
 {
-  "name": "Callback-Testing",
+  "name": "LeaderboardCI",
   "version": "0.0.1",
-  "author": "Mike Stark <mike.stark@vidyard.com>",
+  "author": "Senne Vande Sompele <senne.vandesompele@gmail.com>",
   "dependencies": {
     "express": "3.1.x",
     "socket.io": "~0.9",
     "jade": "0.31.x",
     "async": "~0.6.1",
-    "node-inspector": "~0.7.2",
     "gravatar": "~1.0.6",
     "lodash": "~2.4.1",
     "redis": "^0.10.1",
     "redis-url": "^0.2.0",
     "config": "^0.4.35",
     "yaml": "^0.2.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sennevds/LeaderboardCI.git"
   },
   "engines": {
     "node": "0.10.x",
