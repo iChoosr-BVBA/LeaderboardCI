@@ -48,74 +48,74 @@ function getPoints( buildId, Person ) {
             try {
 
                 redis.get( "obj", function ( er, data ) {
-                    var tempfile = JSON.parse( data );
-                    for ( var user in tempfile ) {
-                        usersarray[user] = new person( tempfile[user]['name'] );
-                        usersarray[user].lastdate = tempfile[user]['lastdate'];
-                        usersarray[user].build = tempfile[user]['build'];
-                        usersarray[user].gravUrl = tempfile[user]['gravUrl'];
-                        usersarray[user].status = tempfile[user]['status'];
-                        usersarray[user].streak = tempfile[user]['streak'];
-                        usersarray[user].points = tempfile[user]['points'];
+                    if (data) {
+                        var tempfile = JSON.parse(data);
+                        for (var user in tempfile) {
+                            usersarray[user] = new person(tempfile[user]['name']);
+                            usersarray[user].lastdate = tempfile[user]['lastdate'];
+                            usersarray[user].build = tempfile[user]['build'];
+                            usersarray[user].gravUrl = tempfile[user]['gravUrl'];
+                            usersarray[user].status = tempfile[user]['status'];
+                            usersarray[user].streak = tempfile[user]['streak'];
+                            usersarray[user].points = tempfile[user]['points'];
 
-                    }
-
-                    buildstatus[0] = new buildStatus( results[0]['buildType']['name'], results[0]['status'], results[0]['buildType']['id'], results[0]['startDate'], results[0]['finishDate'] );
-                    var uniqpersons = _.uniq( results[2] );
-
-                    for ( var k = 0; k < uniqpersons.length; k++ ) {
-                        if ( uniqpersons[k] != "undefined" && uniqpersons[k] != null ) {
-                            var userName = checkdouble( uniqpersons[k] );
-                            if ( !usersarray[uniqpersons[k]] ) {
-
-                                usersarray[userName] = new person( userName );
-                            }
                         }
 
-                        if ( usersarray[userName] ) {
-                            if ( results[0] != null && !_.contains(excludedBuilds, buildstatus[0]['id'])) {
-                                if ( buildstatus[0]['status'] == "SUCCESS" ) {
-                                    usersarray[userName].addPoints( 1 );
-                                    usersarray[userName].lastdate.push( buildstatus[0]['finishdate'] );
-                                    usersarray[userName].build.push( buildstatus[0]['id'] );
-                                    if ( usersarray[userName].status && usersarray[userName].status == "Success" ) {
-                                        if ( usersarray[userName].streak < 5 ) {
-                                            usersarray[userName].streakAdd();
+                        buildstatus[0] = new buildStatus(results[0]['buildType']['name'], results[0]['status'], results[0]['buildType']['id'], results[0]['startDate'], results[0]['finishDate']);
+                        var uniqpersons = _.uniq(results[2]);
+
+                        for (var k = 0; k < uniqpersons.length; k++) {
+                            if (uniqpersons[k] != "undefined" && uniqpersons[k] != null) {
+                                var userName = checkdouble(uniqpersons[k]);
+                                if (!usersarray[uniqpersons[k]]) {
+
+                                    usersarray[userName] = new person(userName);
+                                }
+                            }
+
+                            if (usersarray[userName]) {
+                                if (results[0] != null && !_.contains(excludedBuilds, buildstatus[0]['id'])) {
+                                    if (buildstatus[0]['status'] == "SUCCESS") {
+                                        usersarray[userName].addPoints(1);
+                                        usersarray[userName].lastdate.push(buildstatus[0]['finishdate']);
+                                        usersarray[userName].build.push(buildstatus[0]['id']);
+                                        if (usersarray[userName].status && usersarray[userName].status == "Success") {
+                                            if (usersarray[userName].streak < 5) {
+                                                usersarray[userName].streakAdd();
+                                            }
+                                            if (usersarray[userName].streak >= 5) {
+                                                usersarray[userName].streakReset();
+                                                usersarray[userName].addPoints(4);
+                                            }
                                         }
-                                        if ( usersarray[userName].streak >= 5 ) {
-                                            usersarray[userName].streakReset();
-                                            usersarray[userName].addPoints( 4 );
-                                        }
+                                        usersarray[userName].status = "Success";
+                                    } else if (buildstatus[0]['status'] == "FAILURE" && !_.contains(excludedBuilds, buildstatus[0]['id'])) {
+                                        usersarray[userName].substractPoints(4);
+                                        usersarray[userName].lastdate.push(buildstatus[0]['finishdate']);
+                                        usersarray[userName].build.push(buildstatus[0]['id']);
+                                        usersarray[userName].status = "Failed";
+                                        usersarray[userName].streakReset();
                                     }
-                                    usersarray[userName].status = "Success";
-                                } else if ( buildstatus[0]['status'] == "FAILURE" && !_.contains(excludedBuilds, buildstatus[0]['id'])) {
-                                    usersarray[userName].substractPoints( 4 );
-                                    usersarray[userName].lastdate.push( buildstatus[0]['finishdate'] );
-                                    usersarray[userName].build.push( buildstatus[0]['id'] );
-                                    usersarray[userName].status = "Failed";
-                                    usersarray[userName].streakReset();
                                 }
                             }
+
                         }
 
+
+                        userInfo(function(er2, profiles) {
+                            for (var user in usersarray) {
+                                for (var i = 0; i < profiles.length; i++) {
+                                    if (usersarray[user]['name'] == profiles[i]['username']) {
+                                        usersarray[user].gravUrl = profiles[i]['img'];
+                                    }
+                                }
+                            }
+                            redis.set("obj", JSON.stringify(usersarray));
+                            fileio.writeFile("temp/score.txt", JSON.stringify(usersarray));
+                            console.log(usersarray);
+                            Person(err, usersarray);
+                        });
                     }
-
-
-
-                    userInfo( function ( er2, profiles ) {
-                        for ( var user in usersarray ) {
-                            for ( var i = 0; i < profiles.length; i++ ) {
-                                if ( usersarray[user]['name'] == profiles[i]['username'] ) {
-                                    usersarray[user].gravUrl = profiles[i]['img'];
-                                }
-                            }
-                        }
-                        redis.set( "obj", JSON.stringify( usersarray ) );
-                        fileio.writeFile( "temp/score.txt", JSON.stringify( usersarray ) );
-                        console.log( usersarray );
-                        Person( err, usersarray );
-                    });
-
                 });
 
             } catch ( e ) {
