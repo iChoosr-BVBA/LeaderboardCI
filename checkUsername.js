@@ -1,20 +1,13 @@
 ﻿var GetData = require('./Request');
 var async = require('async');
+var Usernames = require( 'config' ).Usernames;
+var _ = require( 'lodash' );
 
 function findDouble(name) {
- 
-            if(name == "rakhmetovruslan"){
-                return "ruslan";
-                }
-            if(name == "cybercaveman"){
-                return "wouter";
-                }
-            if(name == "bobvanlooveren" || name == "bubbltrubl"){
-                return "bob";
-                }
-            else{
-                 return name;
-                }
-        
+    if (Usernames[name]) {
+        return Usernames[name];
+    } else {
+        return name;
+    }
 };
 module.exports = findDouble;
