@@ -32,13 +32,15 @@ app.post( '/', function ( req, res ) {
     //POST data to any listeners
     console.log( req['body']['build']['buildId'] );
     try {
-        points( /*req['body']['build']['buildId']*/"19374", function ( err, profile ) {
+        points( req['body']['build']['buildId'], function ( err, profile ) {
             profiles = profile;
             try {
                 redis.get( "obj", function ( er, data ) {
-                    score = JSON.parse( data );
-                    io.sockets.in( 'callbackroom' ).emit( 'message', score );
-                    console.log( score );
+                    if (data) {
+                        score = JSON.parse(data);
+                        io.sockets.in('callbackroom').emit('message', score);
+                        console.log(score);
+                    }
                 });
                 //score = JSON.parse( fileio.readFile( "temp/score.txt" ) );
             } catch ( d ) {
@@ -66,11 +68,14 @@ io.on( 'connection', function ( socket ) {
     socket.join( 'callbackroom' );
     try {
         redis.get( "obj", function ( er, data ) {
-                    score = JSON.parse( data );
-                    if ( score ) {
-                        io.sockets.in( 'callbackroom' ).emit( 'message', score );
-                    }
-                });
+            if (data) {
+                score = JSON.parse(data);
+                if (score) {
+                    io.sockets.in('callbackroom').emit('message', score);
+                }
+            }
+        });
+
         //score = JSON.parse( fileio.readFile( "temp/score.txt" ) );
     } catch ( e ) {
         console.log( "score.txt doesn't exist" );

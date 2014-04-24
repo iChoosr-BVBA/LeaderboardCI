@@ -1,10 +1,9 @@
 ﻿var http = require('http');
 var config = require('config').Host;
-var host = /*'83.219.69.27'*/config.host;
-var auth = /*'student:ichose1989'*/config.auth;
+var host = config.host;
+var auth = config.auth;
 var port = config.port;
-/*var host = "127.0.0.1";
-var auth = 'Senne:Simpel00';*/
+
 function getData(path, callback) {
     var req = http.request({
         host: host, // here only the domain name
