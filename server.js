@@ -32,7 +32,7 @@ app.post( '/', function ( req, res ) {
     //POST data to any listeners
     console.log( req['body']['build']['buildId'] );
     try {
-        points("19312" /*req['body']['build']['buildId']*/, function ( err, profile ) {
+        points(req['body']['build']['buildId'], function ( err, profile ) {
             profiles = profile;
             try {
                 redis.get( "obj", function ( er, data ) {
