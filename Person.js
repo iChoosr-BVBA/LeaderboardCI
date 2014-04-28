@@ -4,7 +4,7 @@ function Person(Name) {
     this.name = Name;
     this.lastdate = [];
     this.build = [];
-    this.builDateArr = [];
+    this.builDateArr = "";
     this.gravUrl = "";
     this.status = "";
     this.streak = 0;
@@ -22,14 +22,7 @@ Person.prototype.addPoints = function (punt) {
 Person.prototype.substractPoints = function (punt) {
     this.points -= punt;
 };
-Person.prototype.organizeArray = function() {
-    var object = {};
-    while (this.build.length) {
-        var key = this.build.pop();
-        object[key] = this.lastdate.pop();
-    }
-    this.builDateArr.push( object);
-};
+
 Person.prototype.streakAdd = function () {
     this.streak += 1;
 };

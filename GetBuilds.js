@@ -86,7 +86,7 @@ function getPoints( buildId, Person ) {
                                 if ( results[0] != null && !_.contains( excludedBuilds, buildstatus[0]['id'] ) ) {
                                     if ( buildstatus[0]['status'] == "SUCCESS" ) {
                                         usersarray[userName].addPoints( 1 );
-                                        usersarray[userName].lastdate.push( buildstatus[0]['finishdate'] );
+                                        usersarray[userName].lastdate=( buildstatus[0]['finishdate'] );
                                         usersarray[userName].build.push( buildstatus[0]['id'] );
                                         if ( usersarray[userName].status && usersarray[userName].status == "Success" ) {
                                             if ( usersarray[userName].streak < 5 ) {
@@ -100,7 +100,7 @@ function getPoints( buildId, Person ) {
                                         usersarray[userName].status = "Success";
                                     } else if ( buildstatus[0]['status'] == "FAILURE" && !_.contains( excludedBuilds, buildstatus[0]['id'] ) ) {
                                         usersarray[userName].substractPoints( 4 );
-                                        usersarray[userName].lastdate.push( buildstatus[0]['finishdate'] );
+                                        usersarray[userName].lastdate=( buildstatus[0]['finishdate'] );
                                         usersarray[userName].build.push( buildstatus[0]['id'] );
                                         usersarray[userName].status = "Failed";
                                         usersarray[userName].streakReset();

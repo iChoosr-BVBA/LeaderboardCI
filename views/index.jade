@@ -27,6 +27,37 @@ head
        return obj;
       };
       var result=sortJSON(msg);
+      var suc= [];
+      var fail=[];
+      _.findKey(msg, function(result) {
+       if(result['status']=='Success')
+        suc.push(result);
+      });
+      _.findKey(msg, function(result) {
+       if(result['status']=='Failed')
+        fail.push(result);
+      });
+      function dynamicSort(property) {
+       var sortOrder = 1;
+       if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+       }
+       return function (a,b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+       }
+      }
+      if(suc.length!=0)
+      {
+       var lastSuc = suc.sort(dynamicSort("-lastdate"));
+       document.getElementById("success").src=lastSuc[0]['gravUrl']
+      }
+      if(fail.length!=0)
+      {
+       var lastFail = fail.sort(dynamicSort("-lastdate"));
+       document.getElementById("failed").src=lastFail[0]['gravUrl']
+      }
       for(var name in result)
       {
        if(msg[name]['status']=='Failed')
@@ -43,6 +74,11 @@ head
       
   body(style='background-color: #999;')
     h1(align='center') Leaderboard
+    div(class='last')
+     p(style='color: #00FF00; margin-left:5px') last successfull build:
+      img(id="success")
+     p(style='color: #FF0000; margin-left:5px')  last failed build:
+      img(id="failed")
     .gridster
       ul
-    ul#messages
+
