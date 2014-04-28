@@ -45,7 +45,7 @@ function getPoints( buildId, Person ) {
         }
     ],
         function ( err, results ) {
-            try {
+            /*try {*/
 
                 redis.get("obj", function(er, data) {
                     if (data) {
@@ -61,10 +61,10 @@ function getPoints( buildId, Person ) {
 
                         }
                     }
-                });
-            } catch ( e ) {
+                
+           /* } catch ( e ) {
                 console.log( e );
-            }
+            }*/
             var username;
 
                     buildstatus[0] = new buildStatus( results[0]['buildType']['name'], results[0]['status'], results[0]['buildType']['id'], results[0]['startDate'], results[0]['finishDate'] );
@@ -124,6 +124,7 @@ function getPoints( buildId, Person ) {
                             console.log( usersarray );
                             Person( err, usersarray );
                         });
+        });
         });
 }
 module.exports = getPoints;
