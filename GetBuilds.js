@@ -94,11 +94,15 @@ function getPoints( buildId, Person ) {
                                 usersarray[userName].addPoints( 1 );
                                 usersarray[userName].lastdate = ( buildstatus[0]['finishdate'] );
                                 usersarray[userName].build.push( buildstatus[0]['id'] );
+                                if (usersarray[userName].streak5 == true) {
+                                    usersarray[userName].streak5 = false;
+                                }
                                 if ( usersarray[userName].status && usersarray[userName].status == "Success" ) {
                                     if ( usersarray[userName].streak < 5 ) {
                                         usersarray[userName].streakAdd();
                                     }
                                     if ( usersarray[userName].streak >= 5 ) {
+                                        usersarray[userName].streak5=true;
                                         usersarray[userName].streakReset();
                                         usersarray[userName].addPoints( 4 );
                                     }
@@ -110,6 +114,7 @@ function getPoints( buildId, Person ) {
                                 usersarray[userName].build.push( buildstatus[0]['id'] );
                                 usersarray[userName].status = "Failed";
                                 usersarray[userName].streakReset();
+                                usersarray[userName].streak5 = false;
                             }
                         }
                     }

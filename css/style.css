@@ -76,7 +76,7 @@ div {
 	width: 20em;
 }
 .player .name {
-	width: 300px;
+	width: 5em;
 	text-align: left;
 	clear: both;
 	padding: 0;
@@ -131,4 +131,11 @@ body, #divWrap {
 .gridster * {
     margin:auto 0 ;
     padding:0;
+}
+.badge {
+	float: left;
+	overflow: hidden;
+}
+.det{
+	float:left;
 }

@@ -9,6 +9,7 @@ function Person(Name) {
     this.status = "";
     this.streak = 0;
     this.points = 0;
+    this.streak5 = false;
 }
     // class methods
 Person.prototype = {
