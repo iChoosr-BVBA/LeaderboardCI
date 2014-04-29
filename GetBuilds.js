@@ -94,9 +94,6 @@ function getPoints( buildId, Person ) {
                                 usersarray[userName].addPoints( 1 );
                                 usersarray[userName].lastdate = ( buildstatus[0]['finishdate'] );
                                 usersarray[userName].build.push( buildstatus[0]['id'] );
-                                if (usersarray[userName].streak5 == true) {
-                                    usersarray[userName].streak5 = false;
-                                }
                                 if ( usersarray[userName].status && usersarray[userName].status == "Success" ) {
                                     if ( usersarray[userName].streak < 5 ) {
                                         usersarray[userName].streakAdd();
