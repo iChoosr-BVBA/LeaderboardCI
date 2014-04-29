@@ -1,6 +1,7 @@
-!!! 5
+doctype html
 html
-head
+ head
+    meta(name='viewport', content='width=device-width')
     script(src='/socket.io/socket.io.js')
     link(rel='stylesheet', type='text/css', href='/js/jquery.gridster.min.css')
     link(rel='stylesheet', type='text/css', href='/css/style.css')
@@ -9,76 +10,52 @@ head
     script(type='text/javascript', src='/js/lodash.min.js')
     script.
       $(function(){
-      $(".gridster ul").gridster({
-      widget_margins: [10, 10],
-      widget_base_dimensions: [300, 93]
-      });
+       $(".gridster ul").gridster({
+       widget_margins: [10, 10],
+       widget_base_dimensions: [75, 93]
+       });
       });
       var socket = io.connect()
       socket.on('message', function(msg){
-      var gridster = $(".gridster ul").gridster().data('gridster');
-      gridster.disable();
-      gridster.remove_all_widgets();
-      var sortJSON=function (json){
+       var gridster = $(".gridster ul").gridster().data('gridster');
+       gridster.disable();
+       //gridster.remove_all_widgets();
+       var sortJSON=function (json){
        var arr=[],
        obj={};
        arr=_.map(_.sortBy(json, 'points'), _.values);
        _.map(arr,function (el){return obj[el[0]]=el;});
        return obj;
-      };
-      var result=sortJSON(msg);
-      var suc= [];
-      var fail=[];
-      _.findKey(msg, function(result) {
-       if(result['status']=='Success')
-        suc.push(result);
-      });
-      _.findKey(msg, function(result) {
-       if(result['status']=='Failed')
-        fail.push(result);
-      });
-      function dynamicSort(property) {
-       var sortOrder = 1;
-       if(property[0] === "-") {
-        sortOrder = -1;
-        property = property.substr(1);
-       }
-       return function (a,b) {
-        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-        return result * sortOrder;
-       }
-      }
-      if(suc.length!=0)
-      {
-       var lastSuc = suc.sort(dynamicSort("-lastdate"));
-       document.getElementById("success").src=lastSuc[0]['gravUrl']
-      }
-      if(fail.length!=0)
-      {
-       var lastFail = fail.sort(dynamicSort("-lastdate"));
-       document.getElementById("failed").src=lastFail[0]['gravUrl']
-      }
-      for(var name in result)
-      {
-       if(msg[name]['status']=='Failed')
+       };
+       var result=sortJSON(msg);
+
+       for(var name in result)
        {
-         gridster.add_widget('<li class="new"><div class="playerlist"><div class="player"><div class="box red"><div class="headshot"><img src='+msg[name]['gravUrl']+' border="0" style="border: 1px solid black;"></div><div class="details wide"><div class="name">'+msg[name]['name']+'</div><div class="status">'+msg[name]['status']+'</div></div></div><div class="box red"><div class="points">'+msg[name]['points']+'</div></div></div></div></li>', 2, 1,1,1);
+        if(msg[name]['status']=='Failed')
+        {
+         gridster.add_widget('<li class="new"><div class="playerlist"><div class="player"><div class="box red"><div class="headshot"><img src='+msg[name]['gravUrl']+' border="0" style="border: 1px solid black;"></div><div class="details wide"><div class="name">'+msg[name]['name']+'</div><div class="status">'+msg[name]['status']+'</div></div></div><div class="box red"><div class="points">'+msg[name]['points']+'</div></div></div></div></li>', 2, 1,8,1);
+        }
+        else
+        {
+         gridster.add_widget('<li class="new"><div class="playerlist"><div class="player"><div class="box"><div class="headshot"><img src='+msg[name]['gravUrl']+' border="0" style="border: 1px solid black;"></div><div class="details wide"><div class="name">'+msg[name]['name']+'</div><div class="status">'+msg[name]['status']+'</div></div></div><div class="box"><div class="points">'+msg[name]['points']+'</div></div></div></div></li>', 2, 1,8,1);
+        }
        }
-       else
-       {
-         gridster.add_widget('<li class="new"><div class="playerlist"><div class="player"><div class="box"><div class="headshot"><img src='+msg[name]['gravUrl']+' border="0" style="border: 1px solid black;"></div><div class="details wide"><div class="name">'+msg[name]['name']+'</div><div class="status">'+msg[name]['status']+'</div></div></div><div class="box"><div class="points">'+msg[name]['points']+'</div></div></div></div></li>', 2, 1,1,1);
-       }
+       })
+      socket.on('lastfailed', function(msg){
+      for(var name in msg)
+      {
+        var mydiv = document.getElementById("failed");
+        var imgTag = document.createElement('img');
+        imgTag.setAttribute('src',msg[name]['gravUrl']);
+        mydiv.appendChild(imgTag);
       }
-      })
-    style.
+      });
       
-  body(style='background-color: #999;')
+ body(style='background-color: #999;')
     h1(align='center') Leaderboard
     div(class='last')
-     p(style='color: #00FF00; margin-left:5px') last successfull build:
-      img(id="success")
      p(style='color: #FF0000; margin-left:5px')  last failed build:
-      img(id="failed")
+      div(id="failed")
     .gridster
-      ul
-
+     ul
+      

@@ -10,7 +10,10 @@
 
 ul, ol {
     list-style: none;
+    margin: auto 0 !important;
+    padding: 0 !important;
 }
+
 /* =============================================================================
    COMMONS
 ========================================================================== */
@@ -28,12 +31,14 @@ div {
 	font-family: 'Fjalla One', Arial, sans-serif;
 	font-size: 20px;
 }
-
+.gridster ready {
+    float: left;
+}
 .playerlist {
-	width: 740px;
-	padding: 10px;
-	margin: 25px;
-	margin-top: 0px;
+	width: 29em !important;
+	padding: 10px !important;
+	margin: 25px !important;
+	margin-top: 0px !important;
 }
 .player {
 }
@@ -46,7 +51,7 @@ div {
 	border: 1px solid black;
 	margin-bottom: 5px;
 	margin-right: 5px;
-	height: 55px;
+	height: 2.9em;
 }
 .player div {
 	padding: 6px;
@@ -60,16 +65,15 @@ div {
 	padding: 0;
 }
 .player .headshot img {
-	width: 55px;
-	height: 55px;
+	width: 2.8em;
 }
 .player .details {
-	width: 370px;
+	width: 25em;
 	margin-top: 3px;
 	margin-left: 5px;
 }
 .player .details.wide {
-	width: 440px;
+	width: 20em;
 }
 .player .name {
 	width: 300px;
@@ -96,8 +100,8 @@ body, #divWrap {
 	filter: alpha(opacity=70);
 	opacity: 0.7;
 	border: 1px solid black;
-	margin-bottom: 5px;
-	margin-right: 5px;
+	margin-bottom: 5px !important;
+	margin-right: 5px !important;
 	height: 55px;
 }
 .box.red {
@@ -106,11 +110,25 @@ body, #divWrap {
 	border: 1px solid #cc0000;
 }
 .last {
+    float: left;
     border:1px solid black; 
     margin:0; 
-    width:15%;
+    width:11em;
     top: 8.5%;
     border-radius:5px;
     background-color: rgba(0, 0, 0, 0.7);
-    position: absolute;
+    position: relative;
+}
+.contentWrapper {
+    margin: 10px auto;
+    padding: auto;
+    overflow: hidden;
+    position: static !important;
+    display: inline-block;
+    text-align: left;
+}
+
+.gridster * {
+    margin:auto 0 ;
+    padding:0;
 }

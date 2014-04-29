@@ -26,6 +26,7 @@
     <Compile Include="checkUsername.js" />
     <Compile Include="GetBuilds.js" />
     <Compile Include="getUsers.js" />
+    <Compile Include="lastBuild.js" />
     <Compile Include="node_modules\async\lib\async.js" />
     <Compile Include="node_modules\config\doc\classmap.js" />
     <Compile Include="node_modules\config\lib\config.js" />

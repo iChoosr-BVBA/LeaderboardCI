@@ -35,10 +35,16 @@ app.post( '/', function ( req, res ) {
         points(req['body']['build']['buildId'], function ( err, profile ) {
             profiles = profile;
             try {
+                redis.get("failed", function(er, result) {
+                    if (result) {
+                        io.sockets.emit('lastfailed', JSON.parse(result));
+                    }
+                });
                 redis.get( "obj", function ( er, data ) {
                     if (data) {
                         score = JSON.parse(data);
                         io.sockets.in('callbackroom').emit('message', score);
+                        io.sockets.emit('test', 'hallo');
                         console.log(score);
                     }
                 });
@@ -67,11 +73,17 @@ server.listen( port, function () {
 io.on( 'connection', function ( socket ) {
     socket.join( 'callbackroom' );
     try {
+        redis.get("failed", function(er, result) {
+                    if (result) {
+                        io.sockets.emit('lastfailed', JSON.parse(result));
+                    }
+                });
         redis.get( "obj", function ( er, data ) {
             if (data) {
                 score = JSON.parse(data);
                 if (score) {
                     io.sockets.in('callbackroom').emit('message', score);
+                    io.sockets.emit('test', 'hallo');
                 }
             }
         });
