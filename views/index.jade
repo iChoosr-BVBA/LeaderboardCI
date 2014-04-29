@@ -42,10 +42,12 @@ html
        }
        })
       socket.on('lastfailed', function(msg){
+      $('.fail').remove();
       for(var name in msg)
       {
         var mydiv = document.getElementById("failed");
         var imgTag = document.createElement('img');
+        imgTag.className ="fail"
         imgTag.setAttribute('src',msg[name]['gravUrl']);
         mydiv.appendChild(imgTag);
       }
