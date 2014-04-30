@@ -31,28 +31,19 @@ div {
 	font-family: 'Fjalla One', Arial, sans-serif;
 	font-size: 20px;
 }
-.gridster ready {
+.gridster .ready {
     float: left;
+    margin:auto 0 ;
+    padding:0;
 }
 .playerlist {
 	width: 29em !important;
 	padding: 10px !important;
 	margin: 25px !important;
-	margin-top: 0px !important;
+	margin-top: 0 !important;
 }
-.player {
-}
-.box {
-	background-color: rgb(0,0,0);
-	background-color: rgba(0,0,0,0.7);
-	zoom: 1;
-	filter: alpha(opacity=70);
-	opacity: 0.7;
-	border: 1px solid black;
-	margin-bottom: 5px;
-	margin-right: 5px;
-	height: 2.9em;
-}
+
+
 .player div {
 	padding: 6px;
 	float: left;
@@ -82,12 +73,6 @@ div {
 	padding: 0;
 }
 
-body, #divWrap {
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background-color: #999;
-}
 .player .status {
 	font-size: 11px;
 	padding: 0;
@@ -102,7 +87,7 @@ body, #divWrap {
 	border: 1px solid black;
 	margin-bottom: 5px !important;
 	margin-right: 5px !important;
-	height: 55px;
+	height: 2.9em;
 }
 .box.red {
 	background-color: rgb(204,0,0);
@@ -118,19 +103,6 @@ body, #divWrap {
     border-radius:5px;
     background-color: rgba(0, 0, 0, 0.7);
     position: relative;
-}
-.contentWrapper {
-    margin: 10px auto;
-    padding: auto;
-    overflow: hidden;
-    position: static !important;
-    display: inline-block;
-    text-align: left;
-}
-
-.gridster * {
-    margin:auto 0 ;
-    padding:0;
 }
 .badge {
 	float: left;

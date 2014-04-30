@@ -3,16 +3,14 @@ var app = express();
 var http = require( 'http' );
 var server = http.createServer( app );
 var io = require( 'socket.io' ).listen( server );
-var points = require( './GetBuilds' );
-var file = require( './FileIO' );
+var points = require( './lib/GetBuilds' );
 var redis = require('redis-url').connect(process.env.REDISTOGO_URL);
 var score = [];
 var profiles = [];
-var fileio = new file();
 app.configure( function () {
-    app.use( "/css", express.static( __dirname + '/css' ) );
-    app.use( "/js", express.static( __dirname + '/js' ) );
-    app.use( "/img", express.static( __dirname + '/img' ) );
+    app.use( "/css", express.static( __dirname + '/assets/css' ) );
+    app.use( "/js", express.static( __dirname + '/assets/js' ) );
+    app.use( "/img", express.static( __dirname + '/assets/img' ) );
     app.set( 'views', __dirname + '/views' );
     app.set( 'view engine', 'jade' );
 
@@ -49,7 +47,6 @@ app.post( '/', function ( req, res ) {
                         console.log(score);
                     }
                 });
-                //score = JSON.parse( fileio.readFile( "temp/score.txt" ) );
             } catch ( d ) {
                 console.log( "score.txt doesn't exist" );
             }
@@ -59,7 +56,6 @@ app.post( '/', function ( req, res ) {
         console.log( e );
     }
 
-    //points(req['body']['build']['buildInternalTypeId']);
     res.send( "ok" );
 });
 
@@ -75,11 +71,11 @@ io.on( 'connection', function ( socket ) {
     socket.join( 'callbackroom' );
     try {
         redis.get("failed", function(er, result) {
-                    if (result) {
-                        io.sockets.emit('lastfailed', JSON.parse(result));
-                    }
-                });
-        redis.get( "obj", function ( er, data ) {
+            if (result) {
+                io.sockets.emit('lastfailed', JSON.parse(result));
+            }
+        });
+        redis.get("obj", function(er, data) {
             if (data) {
                 score = JSON.parse(data);
                 if (score) {
@@ -89,10 +85,7 @@ io.on( 'connection', function ( socket ) {
             }
         });
 
-        //score = JSON.parse( fileio.readFile( "temp/score.txt" ) );
-    } catch ( e ) {
-        console.log( "score.txt doesn't exist" );
+    } catch (e) {
+        console.log("score.txt doesn't exist");
     }
-    
-
 });
