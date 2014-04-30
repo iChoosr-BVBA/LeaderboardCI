@@ -39,9 +39,13 @@ socket.on('lastfailed', function(msg) {
     $('.fail').remove();
     for (var name in msg) {
         var mydiv = document.getElementById("failed");
+        var homertag = document.createElement('img');
         var imgTag = document.createElement('img');
-        imgTag.className = "fail"
+        imgTag.className = "fail";
+        homertag.setAttribute('src', '/img/homer.png');
+        homertag.setAttribute('style', 'position: absolute; left:0px');
         imgTag.setAttribute('src', msg[name]['gravUrl']);
         mydiv.appendChild(imgTag);
-    }
+        mydiv.appendChild(homertag);
+    }//<img src="/img/snow.gif" style="position: absolute; top: 17px; left:44px; opacity:0.8;">
 });
