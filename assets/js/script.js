@@ -39,7 +39,7 @@ socket.on('message', function(msg) {
             }
         }
     }
-})
+});
 socket.on('lastfailed', function(msg) {
     $('.fail').remove();
     for (var name in msg) {

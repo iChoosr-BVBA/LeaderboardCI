@@ -67,7 +67,7 @@ div {
 	width: 20em;
 }
 .player .name {
-	width: 6em;
+	overflow: auto;
 	text-align: left;
 	clear: both;
 	padding: 0;
