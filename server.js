@@ -31,7 +31,7 @@ app.post( '/', function ( req, res ) {
     //POST data to any listeners
     console.log( req['body']['build']['buildId'] );
     try {
-        points(/*req['body']['build']['buildId']*/"19860", function ( err, profile, failed ) {
+        points(req['body']['build']['buildId'], function ( err, profile, failed ) {
             profiles = profile;
             console.log(failed);
             if (failed) {
