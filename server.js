@@ -31,9 +31,16 @@ app.post( '/', function ( req, res ) {
     //POST data to any listeners
     console.log( req['body']['build']['buildId'] );
     try {
-        points(req['body']['build']['buildId'], function ( err, profile ) {
+        points(/*req['body']['build']['buildId']*/"19860", function ( err, profile, failed ) {
             profiles = profile;
-            try {
+            console.log(failed);
+            if (failed) {
+                io.sockets.emit('lastfailed', failed);
+            }
+            if (profile) {
+                io.sockets.emit('message', profile);
+            }
+           /* try {
                 redis.get("failed", function(er, result) {
                     if (result) {
                         io.sockets.emit('lastfailed', JSON.parse(result));
@@ -49,7 +56,7 @@ app.post( '/', function ( req, res ) {
                 });
             } catch ( d ) {
                 console.log( "score.txt doesn't exist" );
-            }
+            }*/
             
         });
     } catch ( e ) {
