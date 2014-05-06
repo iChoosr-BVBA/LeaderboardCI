@@ -26,6 +26,7 @@
     <Compile Include="assets\js\jquery.gridster.min.js" />
     <Compile Include="assets\js\lodash.min.js" />
     <Compile Include="assets\js\script.js" />
+    <Compile Include="lib\Accomplishments.js" />
     <Compile Include="lib\Builds.js" />
     <Compile Include="lib\checkUsername.js" />
     <Compile Include="lib\GetBuilds.js" />

@@ -110,3 +110,13 @@ div {
 .det{
 	float:left;
 }
+.badgeimg img {
+    width: 4em;
+}
+.badgeimg {
+    padding: 0 !important;
+    position: relative;
+    top: -0.5em;
+    left: 1em;
+
+}
