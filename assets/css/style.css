@@ -111,7 +111,7 @@ div {
 	float:left;
 }
 .badgeimg img {
-    height: 56px;
+    height: 3em;
 }
 .badgeimg {
     padding: 0 !important;
