@@ -13,11 +13,11 @@ if you want to add achievements just edit the Accomplishments.js file in the lib
 
 Requirements
 ============
--Redis database
--Node.js
--teamcity
--webhooks plugin for teamcity
--optional: for every mail adres of the users in teamcity a gravatar image.
+- Redis database
+- Node.js
+- teamcity
+- webhooks plugin for teamcity
+- optional: for every mail adres of the users in teamcity a gravatar image.
 
 Installation
 ============
