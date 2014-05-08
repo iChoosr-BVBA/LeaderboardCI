@@ -1,0 +1,14 @@
+{
+	"Host": {
+		"host": "x.x.x.x",
+		"auth": "user:pass",
+		"port": 8111
+	},
+	"ExcludeBuilds": [
+		"buildid","buildid"
+	],
+	"Usernames": {
+		"username": "realname",
+		"username": "realname"
+	}
+}
